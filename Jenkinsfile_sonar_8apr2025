@@ -22,8 +22,8 @@ pipeline {
                 sh 'ls -ltrh'
                 
                 sh ''' mvn sonar:sonar \\
-                      -Dsonar.host.url=http://ec2-18-234-233-210.compute-1.amazonaws.com:9000 \\
-                      -Dsonar.login=squ_fb5fdb469f3cbfe23a88554ae7cd3ba7e3c29263'''
+                      -Dsonar.host.url=ec2-35-173-198-137.compute-1.amazonaws.com:9000 \\
+                      -Dsonar.login=squ_2ed5b128842c4d38ff890dbd7f35eac244ae4fef'''
             }
     	}
 		
@@ -39,7 +39,7 @@ pipeline {
         stage('DEPLOY') {
             steps {
                 echo 'In this stage .war artiface will be deployed on to tomcat '
-				deploy adapters: [tomcat9(credentialsId: 'tomcat', path: '', url: 'http://ec2-52-23-168-78.compute-1.amazonaws.com:8082/')], contextPath: 'mcapp', war: '**/*.war'
+				deploy adapters: [tomcat(credentialsId: 'tomcat', path: '', url: 'http://ec2-35-173-198-137.compute-1.amazonaws.com:8082/')], contextPath: 'mcapp', war: '**/*.war'
 				
             }
         }		
